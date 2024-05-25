@@ -17,6 +17,8 @@ module one_bit_adder(
   output logic Sum,CarryOut
 );
   // TODO: Complete the implementation of this module
+    assign Sum = a ^ b ^ CarryIn;
+    assign CarryOut = (a && b) || (a && CarryIn) || (b && CarryIn);
 endmodule
 
 module one_bit_ALU(
@@ -25,4 +27,10 @@ module one_bit_ALU(
   output logic Result, CarryOut
 );
   // TODO: Complete the implementation of this module
+    wire sumWire, andWire, orWire;
+
+    one_bit_adder oba (a, b, CarryIn, sumWire, CarryOut);
+    assign andWire = a && b;
+    assign orWire = a || b;
+    mux3(andWire, orWire, oba, Operation, Result);
 endmodule
