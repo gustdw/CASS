@@ -1,9 +1,0 @@
-This file contains all my solutions to CASS excersise session 6. If you have any questions,
-feel free to message @zyperiox on Discord.
-
-It could be that the code doesn't work when you try to run the testsuite. This happens because at the end of the testsuite, when running list_insert_test,
-the memory has ran out of room. Malloc returns the last possible address to store something (0xfffffffc), but we need two free spots, so when we try to append, we can't store the new address
-because this would be store at 0xffffffff which is equivalent to 0x00000000 and you can't dereference this.
-
-In order to fix this, I commented out one of the other tests that already passed (like list_remove_test).
-Make sure not to comment out the label 'list_remove_test' and to add ret. For me, this fixed the issue.
