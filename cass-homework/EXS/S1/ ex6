@@ -1,0 +1,24 @@
+.data
+	a: .word 5
+	b: .word 3
+	c: .space 4
+
+.text
+main:
+	lw a1, a
+	lw a2, b
+	la s1, c
+	
+	li t0, 1
+	mv t1, a2
+	
+
+loop:
+	beqz t1, end
+	mul t0, a1, t0
+	addi t1, t1, -1
+	j loop
+	
+end:
+	sw t0, 0(s1)
+	

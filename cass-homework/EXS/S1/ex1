@@ -1,0 +1,14 @@
+.data
+	a: .word 5
+	b: .word 3
+	c: .space 4
+
+.text
+	lw a1, a
+	lw a2, b
+	
+	mul a1, a1, a1
+	mul a2, a2, a2
+	la a0, c
+	add t0, a1, a2
+	sw t0, 0(a0)

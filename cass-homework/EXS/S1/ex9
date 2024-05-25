@@ -1,0 +1,41 @@
+.data
+	string: .string "blossom"
+	substring: .string "hi"
+	
+.text
+main:
+	la s0, string
+	la s1, substring
+	mv t0, s0		#stringpointer
+	li a0, 0
+
+
+iterateOverString:
+	lbu t1, (t0)
+	beqz t1, end		#check if stringpointer is nullbyte
+	
+	mv a2, t0		#a2 = stringpointer
+	mv a4, s1			#reset substringpointer
+	jal compareStrings
+	
+	addi t0, t0, 1		#update stringpointer
+	j iterateOverString
+	
+compareStrings:
+	lbu a3, (a4)		#substring[i]
+	lbu a1, (a2)		#string[i]
+	beqz a3, yes
+	bne a1, a3, return	#branch if string[i] != substring[i]
+	
+	addi a2, a2, 1		#update stringpointer
+	addi a4, a4, 1		#update substringpointer
+	j compareStrings
+
+yes:
+	li a0, 1
+
+return:
+	ret
+	
+end:
+	nop

@@ -1,0 +1,36 @@
+ .data
+ 	x: .word 10
+ 	y: .word 20
+ 	z: .space 4
+
+ .text
+  main:
+	lw a0, x
+	lw a1, y
+	
+	jal sum
+	j end
+	
+ double_it:
+ 	add a0, a0, a0
+ 	ret
+ 
+ sum:
+ 	addi sp, sp, -8
+ 	sw ra, 4(sp)
+ 	sw a0, 0(sp)
+ 	
+ 	mv a0, a1
+ 	jal double_it
+ 	mv a1, a0
+ 	lw a0, 0(sp)
+ 	add a0, a0, a1
+ 	
+ 	lw ra, 4(sp)
+ 	addi sp, sp, 8
+ 	ret
+ 	
+end:
+	la t0, z
+	sw a0, 0(t0)
+ 	
