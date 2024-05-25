@@ -1,0 +1,19 @@
+.data
+	n: .word 5
+	fac: .space 4
+	
+.text
+main:
+	lw a1, n
+	la s1, fac
+	
+	li a0, 1
+	
+loop:
+	beqz a1, end
+	mul a0, a0, a1
+	addi a1, a1, -1
+	j loop
+
+end:
+	sw a0, 0(s1)
